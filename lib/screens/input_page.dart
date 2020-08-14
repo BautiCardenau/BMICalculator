@@ -1,3 +1,4 @@
+import 'package:bmicalculatorflutter/calculator.dart';
 import 'package:bmicalculatorflutter/screens/results_page.dart';
 import '../components/bottom_bar.dart';
 import '../components/round_icon_button.dart';
@@ -208,9 +209,16 @@ class _InputPageState extends State<InputPage> {
               BottomBar(
                 buttonTitle: 'CALCULATE',
                 onTap: () {
+                  Calculator calculator =
+                      Calculator(height: height, weight: weight);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ResultsPage()),
+                    MaterialPageRoute(
+                        builder: (context) => ResultsPage(
+                              bmiResult: calculator.calculateBMI(),
+                              resultText: calculator.getResult(),
+                              interpretation: calculator.getInterpretation(),
+                            )),
                   );
                 },
               ),
